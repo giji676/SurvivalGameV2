@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 467099587}
   - component: {fileID: 467099589}
   - component: {fileID: 467099588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2600,7 +2600,7 @@ GameObject:
   - component: {fileID: 1022223868}
   - component: {fileID: 1022223867}
   - component: {fileID: 1022223866}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2637,7 +2637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useEvents: 0
-  promptMessage: 
+  promptMessage: Enemy
 --- !u!114 &1022223868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4704,6 +4704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450651739164512}
   - component: {fileID: 2101594958}
+  - component: {fileID: 919132147802854877}
   - component: {fileID: 2101594952}
   - component: {fileID: 2101594953}
   - component: {fileID: 2101594954}
@@ -4712,7 +4713,7 @@ GameObject:
   - component: {fileID: 2101594957}
   - component: {fileID: 919132147802854876}
   - component: {fileID: 919132147802854875}
-  - component: {fileID: 919132147802854877}
+  - component: {fileID: 919132147802854878}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4746,9 +4747,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damage:
-    baseValue: 0
+    baseValue: 2
   armor:
-    baseValue: 0
+    baseValue: 1
 --- !u!95 &919132147802854877
 Animator:
   serializedVersion: 3
@@ -4768,6 +4769,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &919132147802854878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147802854874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14651958613484048bc3f44574bd2730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpeed: 1
+  attackDelay: 0.6
 --- !u!1 &1094710107834270857
 GameObject:
   m_ObjectHideFlags: 0
