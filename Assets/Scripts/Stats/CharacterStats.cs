@@ -17,7 +17,7 @@ public class CharacterStats : MonoBehaviour
     {
         damage -= armor.GetValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
-        Debug.Log(damage + " " + armor.GetValue());
+        Debug.Log(gameObject.name + " taking " + damage + " damage ");
 
         currentHealth -= damage;
 
@@ -29,13 +29,12 @@ public class CharacterStats : MonoBehaviour
 
     public void RestoreHealth(int health)
     {
-        //currentHealth = Mathf.Clamp(currentHealth, 0, int.MaxValue);
         currentHealth += health;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     }
 
     public virtual void Die()
     {
-        Debug.Log(transform.name + " died.");
+        Debug.Log(transform.name + " died");
     }
 }

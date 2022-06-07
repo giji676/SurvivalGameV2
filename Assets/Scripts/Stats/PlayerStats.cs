@@ -39,5 +39,11 @@ public class PlayerStats : CharacterStats
             armor.RemoveModifier(oldItem.armorModifier);
             damage.RemoveModifier(oldItem.damageModifier);
         }
-    } 
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        PlayerManager.instance.KillPlayer();
+    }
 }
