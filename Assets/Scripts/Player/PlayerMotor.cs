@@ -16,15 +16,14 @@ public class PlayerMotor : MonoBehaviour
     private Vector2 currentInputVector;
     private Vector2 smoothInputVelocity;
 
-    private Animator animator;
-
     public GameObject inventoryUI;
     public EquipmentManager equipmentManager;
+
+    public Vector3 moveDirection;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Animator>();
         inputManager = GetComponent<InputManager>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -49,7 +48,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void ProcessMove(Vector2 input, float run)
     {
-        Vector3 moveDirection = Vector3.zero;
+        moveDirection = Vector3.zero;
 
         currentInputVector = Vector2.SmoothDamp(currentInputVector, input, ref smoothInputVelocity, smoothInputSpeed);
         moveDirection.x = currentInputVector.x;
@@ -59,9 +58,6 @@ public class PlayerMotor : MonoBehaviour
 
         if (isGrounded && playerVelocity.y < 0)
             playerVelocity.y = -2f;
-
-        animator.SetFloat("Velocity X", moveDirection.x);
-        animator.SetFloat("Velocity Z", moveDirection.z);
 
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
         controller.Move(playerVelocity * Time.deltaTime);
