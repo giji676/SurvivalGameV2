@@ -107,6 +107,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LMB"",
+                    ""type"": ""Button"",
+                    ""id"": ""83f46647-1255-4ac0-bf02-34a4d95d9d08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RMB"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0eb2693-a527-40ac-8f6b-95b2d38c8b8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -250,6 +268,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f0d2b0f-8265-493e-a556-617251e8a5ac"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LMB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87bf2756-faf0-4827-9266-91bab9b03b7b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -785,6 +825,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_Unequip = m_OnFoot.FindAction("Unequip", throwIfNotFound: true);
         m_OnFoot_TakeDamage = m_OnFoot.FindAction("TakeDamage", throwIfNotFound: true);
         m_OnFoot_Heal = m_OnFoot.FindAction("Heal", throwIfNotFound: true);
+        m_OnFoot_LMB = m_OnFoot.FindAction("LMB", throwIfNotFound: true);
+        m_OnFoot_RMB = m_OnFoot.FindAction("RMB", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -865,6 +907,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Unequip;
     private readonly InputAction m_OnFoot_TakeDamage;
     private readonly InputAction m_OnFoot_Heal;
+    private readonly InputAction m_OnFoot_LMB;
+    private readonly InputAction m_OnFoot_RMB;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -878,6 +922,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Unequip => m_Wrapper.m_OnFoot_Unequip;
         public InputAction @TakeDamage => m_Wrapper.m_OnFoot_TakeDamage;
         public InputAction @Heal => m_Wrapper.m_OnFoot_Heal;
+        public InputAction @LMB => m_Wrapper.m_OnFoot_LMB;
+        public InputAction @RMB => m_Wrapper.m_OnFoot_RMB;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -914,6 +960,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Heal.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnHeal;
                 @Heal.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnHeal;
                 @Heal.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnHeal;
+                @LMB.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnLMB;
+                @LMB.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnLMB;
+                @LMB.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnLMB;
+                @RMB.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRMB;
+                @RMB.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRMB;
+                @RMB.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRMB;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -945,6 +997,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Heal.started += instance.OnHeal;
                 @Heal.performed += instance.OnHeal;
                 @Heal.canceled += instance.OnHeal;
+                @LMB.started += instance.OnLMB;
+                @LMB.performed += instance.OnLMB;
+                @LMB.canceled += instance.OnLMB;
+                @RMB.started += instance.OnRMB;
+                @RMB.performed += instance.OnRMB;
+                @RMB.canceled += instance.OnRMB;
             }
         }
     }
@@ -1065,6 +1123,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnUnequip(InputAction.CallbackContext context);
         void OnTakeDamage(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
+        void OnLMB(InputAction.CallbackContext context);
+        void OnRMB(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
