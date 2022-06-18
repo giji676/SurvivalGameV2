@@ -7,12 +7,14 @@ public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
     public PlayerInput.OnFootActions onFoot;
+    private PlayerInteract playerInteract;
 
     private PlayerMotor motor;
     private PlayerLook look;
 
     void Awake()
     {
+        playerInteract = GetComponent<PlayerInteract>();
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
         motor = GetComponent<PlayerMotor>();
@@ -24,6 +26,12 @@ public class InputManager : MonoBehaviour
     void FixedUpdate()
     {
         motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>(), onFoot.Run.ReadValue<float>());
+    }
+
+    private void Update()
+    {
+        if (onFoot.LMB.triggered)
+            playerInteract.RunRaycast();
     }
 
     private void LateUpdate()

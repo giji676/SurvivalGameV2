@@ -36,8 +36,13 @@ public class PlayerMotor : MonoBehaviour
         if (inputManager.onFoot.Inventory.triggered)
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+
+            if (Cursor.lockState == CursorLockMode.Locked)
+                Cursor.lockState = CursorLockMode.None;
+            else if (Cursor.lockState == CursorLockMode.None)
+                Cursor.lockState = CursorLockMode.Locked;
+
+            Cursor.visible = !Cursor.visible;
         }
 
         if (inputManager.onFoot.Unequip.triggered)
@@ -61,6 +66,11 @@ public class PlayerMotor : MonoBehaviour
 
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    public void ProcessMB(float LMB, float RMB)
+    {
+        //Debug.Log(LMB.ToString() + RMB.ToString());
     }
 
     public void Jump()

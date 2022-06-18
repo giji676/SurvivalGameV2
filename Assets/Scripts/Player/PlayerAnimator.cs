@@ -6,6 +6,9 @@ public class PlayerAnimator : CharacterAnimator
 {
     PlayerMotor playerMotor;
 
+    public WeaponAnimations[] weaponAnimations;
+    Dictionary<Equipment, AnimationClip[]> weaponAnimationsDict;
+
     int velX = Animator.StringToHash("Velocity X");
     int velZ = Animator.StringToHash("Velocity Z");
     int usingCombatItem = Animator.StringToHash("UsingCombatItem");
@@ -15,6 +18,12 @@ public class PlayerAnimator : CharacterAnimator
         base.Start();
         playerMotor = GetComponent<PlayerMotor>();
         EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
+
+        weaponAnimationsDict = new Dictionary<Equipment, AnimationClip[]>();
+        foreach (WeaponAnimations a in weaponAnimations)
+        {
+            weaponAnimationsDict.Add(a.weapon, a.clips);
+        }
     }
 
     protected override void Update()
@@ -30,11 +39,16 @@ public class PlayerAnimator : CharacterAnimator
         {
             animator.SetLayerWeight(1, 1);
             animator.SetBool(usingCombatItem, true);
+            if (weaponAnimationsDict.ContainsKey(newItem))
+            {
+                currentAttackAnimSet = weaponAnimationsDict[newItem];
+            }
         }
         else if (newItem == null && oldItem != null && oldItem.equipSlot == EquipmentSlot.Weapon)
         {
             animator.SetLayerWeight(1, 0);
             animator.SetBool(usingCombatItem, false);
+            currentAttackAnimSet = defaultAttackAnimSet;
         }
 
         if (newItem != null && newItem.equipSlot == EquipmentSlot.Shield)
@@ -47,5 +61,12 @@ public class PlayerAnimator : CharacterAnimator
             animator.SetLayerWeight(2, 0);
             animator.SetBool(usingCombatItem, false);
         }
+    }
+
+    [System.Serializable]
+    public struct WeaponAnimations
+    {
+        public Equipment weapon;
+        public AnimationClip[] clips;
     }
 }

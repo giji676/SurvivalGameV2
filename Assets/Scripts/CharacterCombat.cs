@@ -24,11 +24,19 @@ public class CharacterCombat : MonoBehaviour
         attackCooldown -= Time.deltaTime;
     }
 
+    public void TryAttack(CharacterStats targetStats)
+    {
+
+    }
+
     public void Attack(CharacterStats targetStats)
     {
         if (attackCooldown <= 0f)
         {
-            StartCoroutine(DoDamage(targetStats, attackDelay));
+            if (targetStats != null)
+            {
+                StartCoroutine(DoDamage(targetStats, attackDelay));
+            }
 
             if (OnAttack != null)
                 OnAttack();
