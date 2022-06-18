@@ -37,6 +37,7 @@ public class EquipmentManager : MonoBehaviour
 
     public void Equip(Equipment newItem)
     {
+        // Equip 1 item
         int slotIndex = (int)newItem.equipSlot;
         Equipment oldItem = Unequip(slotIndex);
 
@@ -45,19 +46,22 @@ public class EquipmentManager : MonoBehaviour
             onEquipmentChanged.Invoke(newItem, oldItem);
         }
 
+        // Change model blend shape
         SetEquipmentBlendShapes(newItem, 100);
 
         currentEquipment[slotIndex] = newItem;
         SkinnedMeshRenderer newMesh = Instantiate<SkinnedMeshRenderer>(newItem.mesh);
-        newMesh.transform.parent = targetMesh.transform;
 
+        newMesh.transform.parent = targetMesh.transform;
         newMesh.bones = targetMesh.bones;
         newMesh.rootBone = targetMesh.rootBone;
+
         currentMeshes[slotIndex] = newMesh;
     }
 
     public Equipment Unequip(int slotIndex)
     {
+        // Unequip 1 item
         if (currentEquipment[slotIndex] != null)
         {
             if (currentMeshes[slotIndex] != null)
@@ -66,6 +70,7 @@ public class EquipmentManager : MonoBehaviour
             }
 
             Equipment oldItem = currentEquipment[slotIndex];
+            // Change model blend shape
             SetEquipmentBlendShapes(oldItem, 0);
             inventory.Add(oldItem);
             currentEquipment[slotIndex] = null;
@@ -90,6 +95,7 @@ public class EquipmentManager : MonoBehaviour
 
     void SetEquipmentBlendShapes(Equipment item, int weight)
     {
+        // Changed blend shape of a model to a weight, based on the item covered mesh regions
         foreach (EquipmentMeshRegion blendShape in item.coveredMeshRegions)
         {
             targetMesh.SetBlendShapeWeight((int)blendShape, weight);
@@ -102,10 +108,5 @@ public class EquipmentManager : MonoBehaviour
         {
             Equip(item);
         }
-    }
-
-    private void Update()
-    {
-
     }
 }

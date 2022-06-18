@@ -15,6 +15,7 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        // Calculate damage dealt after armor
         damage -= armor.GetValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
         Debug.Log(gameObject.name + " taking " + damage + " damage ");

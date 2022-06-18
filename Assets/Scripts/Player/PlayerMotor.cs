@@ -32,45 +32,46 @@ public class PlayerMotor : MonoBehaviour
     private void Update()
     {
         isGrounded = controller.isGrounded;
+    }
 
-        if (inputManager.onFoot.Inventory.triggered)
-        {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
+    public void UnequipAll()
+    {
+        // Called from InputManager
+        equipmentManager.UnequipAll();
+    }
 
-            if (Cursor.lockState == CursorLockMode.Locked)
-                Cursor.lockState = CursorLockMode.None;
-            else if (Cursor.lockState == CursorLockMode.None)
-                Cursor.lockState = CursorLockMode.Locked;
+    public void InventoryTrigger()
+    {
+        // Called from InputManager
+        inventoryUI.SetActive(!inventoryUI.activeSelf);
 
-            Cursor.visible = !Cursor.visible;
-        }
+        if (Cursor.lockState == CursorLockMode.Locked)
+            Cursor.lockState = CursorLockMode.None;
+        else if (Cursor.lockState == CursorLockMode.None)
+            Cursor.lockState = CursorLockMode.Locked;
 
-        if (inputManager.onFoot.Unequip.triggered)
-        {
-            equipmentManager.UnequipAll();
-        }
+        Cursor.visible = !Cursor.visible;
     }
 
     public void ProcessMove(Vector2 input, float run)
     {
+        // Get player input (WASD)
         moveDirection = Vector3.zero;
 
+        // SmoothDamp to have acceleration/deceleration
         currentInputVector = Vector2.SmoothDamp(currentInputVector, input, ref smoothInputVelocity, smoothInputSpeed);
         moveDirection.x = currentInputVector.x;
         moveDirection.z = currentInputVector.y;
 
+        // Calculate gravity
         playerVelocity.y += gravity * Time.deltaTime;
 
         if (isGrounded && playerVelocity.y < 0)
             playerVelocity.y = -2f;
 
+        // Apply movement
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
         controller.Move(playerVelocity * Time.deltaTime);
-    }
-
-    public void ProcessMB(float LMB, float RMB)
-    {
-        //Debug.Log(LMB.ToString() + RMB.ToString());
     }
 
     public void Jump()

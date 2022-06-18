@@ -7,14 +7,12 @@ public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
     public PlayerInput.OnFootActions onFoot;
-    private PlayerInteract playerInteract;
 
     private PlayerMotor motor;
     private PlayerLook look;
 
-    void Awake()
+    private void Awake()
     {
-        playerInteract = GetComponent<PlayerInteract>();
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
         motor = GetComponent<PlayerMotor>();
@@ -22,8 +20,16 @@ public class InputManager : MonoBehaviour
         onFoot.Jump.performed += ctx => motor.Jump();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
+    {
+        if (onFoot.Inventory.triggered)
+            motor.InventoryTrigger();
+
+        if (onFoot.Unequip.triggered)
+            motor.UnequipAll();
+    }
+
+    private void FixedUpdate()
     {
         motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>(), onFoot.Run.ReadValue<float>());
     }

@@ -25,13 +25,10 @@ public class CharacterCombat : MonoBehaviour
         attackCooldown -= Time.deltaTime;
     }
 
-    public void TryAttack(CharacterStats targetStats)
-    {
-
-    }
-
     public void Attack(CharacterStats targetStats)
     {
+        // Called by playerInteract on LMB
+        // Only attack after attack cooldown is 0, then reset the attack cooldown
         if (attackCooldown <= 0f)
         {
             if (targetStats != null)
@@ -48,6 +45,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void AttackHitEvent()
     {
+        // Called by animation events
         if (opponentStats != null)
         {
             opponentStats.TakeDamage(myStats.damage.GetValue());
