@@ -12,6 +12,8 @@ public class PlayerInteract : MonoBehaviour
     private PlayerAnimator playerAnimator;
     private CharacterCombat characterCombat;
 
+    private Interactable interactable;
+
     private void Start()
     {
         cam = GetComponent<PlayerLook>().cam;
@@ -31,38 +33,32 @@ public class PlayerInteract : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, distance, mask))
         {
-            if (hitInfo.collider.GetComponent<Interacrable>() != null)
+            if (hitInfo.collider.GetComponent<Interactable>() != null)
             {
-                Interacrable interactable = hitInfo.collider.GetComponent<Interacrable>();
+                interactable = hitInfo.collider.GetComponent<Interactable>();
                 playerUI.UpdateText(interactable.promptMessage);
-                if (inputManager.onFoot.Interact.triggered)
-                    interactable.BaseInteract();
-            }
-        }
-    }
 
-    public void RunRaycast()
-    {
-        RaycastHit hitInfo;
-        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * distance);
-        if (Physics.Raycast(ray, out hitInfo, distance, mask))
-        {
-            if (hitInfo.collider.GetComponent<Interacrable>() != null)
-            {
-                Interacrable interactable = hitInfo.collider.GetComponent<Interacrable>();
-                playerUI.UpdateText(interactable.promptMessage);
-                if (interactable.gameObject.name == "Enemy")
+                if (inputManager.onFoot.LMB.triggered)
                 {
-                    interactable.BaseInteract();
+                    if (interactable.gameObject.tag == "Enemy")
+                    {
+                        interactable.BaseInteract();
+                    }
+                    else
+                    {
+                        characterCombat.Attack(null);
+                    }
                 }
-                else
+                else if (inputManager.onFoot.Interact.triggered)
                 {
-                    characterCombat.Attack(null);
+                    if (interactable.gameObject.tag != "Enemy")
+                    {
+                        interactable.BaseInteract();
+                    }
                 }
             }
         }
-        else
+        else if(inputManager.onFoot.LMB.triggered)
         {
             characterCombat.Attack(null);
         }

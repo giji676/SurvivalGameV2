@@ -28,12 +28,6 @@ public class InputManager : MonoBehaviour
         motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>(), onFoot.Run.ReadValue<float>());
     }
 
-    private void Update()
-    {
-        if (onFoot.LMB.triggered)
-            playerInteract.RunRaycast();
-    }
-
     private void LateUpdate()
     {
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterStats))]
-public class Enemy : Interacrable
+public class Enemy : Interactable
 {
     PlayerManager playerManager;
     CharacterStats myStats;

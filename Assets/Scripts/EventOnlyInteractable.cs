@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EventOnlyInteractable : Interacrable
+public class EventOnlyInteractable : Interactable
 {
     
 }

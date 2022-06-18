@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Interacrable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
     public bool useEvents;
     [SerializeField] public string promptMessage;

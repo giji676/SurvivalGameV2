@@ -1,32 +1,32 @@
 using UnityEditor;
 
-[CustomEditor(typeof(Interacrable), true)]
+[CustomEditor(typeof(Interactable), true)]
 public class InteractableEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        Interacrable interacrable = (Interacrable)target;
+        Interactable interactable = (Interactable)target;
         if (target.GetType() == typeof(EventOnlyInteractable))
         {
-            interacrable.promptMessage = EditorGUILayout.TextField("Prompt Message", interacrable.promptMessage);
+            interactable.promptMessage = EditorGUILayout.TextField("Prompt Message", interactable.promptMessage);
             EditorGUILayout.HelpBox("EventOnlyInteratable can ONLY use UnityEvents.", MessageType.Info);
-            if (interacrable.GetComponent<InteractionEvent>() == null)
+            if (interactable.GetComponent<InteractionEvent>() == null)
             {
-                interacrable.useEvents = true;
-                interacrable.gameObject.AddComponent<InteractionEvent>();
+                interactable.useEvents = true;
+                interactable.gameObject.AddComponent<InteractionEvent>();
             }
         }
         else { 
             base.OnInspectorGUI();
-            if (interacrable.useEvents)
+            if (interactable.useEvents)
             {
-                if (interacrable.GetComponent<InteractionEvent>() == null)
-                    interacrable.gameObject.AddComponent<InteractionEvent>();
+                if (interactable.GetComponent<InteractionEvent>() == null)
+                    interactable.gameObject.AddComponent<InteractionEvent>();
             }
             else
             {
-                if (interacrable.GetComponent<InteractionEvent>() != null)
-                    DestroyImmediate(interacrable.GetComponent<InteractionEvent>());
+                if (interactable.GetComponent<InteractionEvent>() != null)
+                    DestroyImmediate(interactable.GetComponent<InteractionEvent>());
             }
         }
     }
