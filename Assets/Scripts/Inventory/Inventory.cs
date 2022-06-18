@@ -22,14 +22,14 @@ public class Inventory : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-    public int space = 20;
+    public int inventorySpace = 20;
     public List<Item> items = new List<Item> ();
 
     public bool Add(Item item)
     {
         if (!item.isDefaultItem)
         {
-            if (items.Count >= space)
+            if (items.Count >= inventorySpace)
             {
                 Debug.Log("not enough room");
                 return false;

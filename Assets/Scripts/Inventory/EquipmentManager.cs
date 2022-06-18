@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    public static EquipmentManager instance;
-
     #region Singleton
+
+    public static EquipmentManager instance;
 
     private void Awake()
     {
