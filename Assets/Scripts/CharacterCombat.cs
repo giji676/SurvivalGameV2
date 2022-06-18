@@ -13,6 +13,7 @@ public class CharacterCombat : MonoBehaviour
     public event System.Action OnAttack;
 
     CharacterStats myStats;
+    CharacterStats opponentStats;
 
     private void Start()
     {
@@ -35,7 +36,7 @@ public class CharacterCombat : MonoBehaviour
         {
             if (targetStats != null)
             {
-                StartCoroutine(DoDamage(targetStats, attackDelay));
+                opponentStats = targetStats;
             }
 
             if (OnAttack != null)
@@ -45,10 +46,12 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    IEnumerator DoDamage(CharacterStats stats, float delay)
+    public void AttackHitEvent()
     {
-        yield return new WaitForSeconds(delay);
-
-        stats.TakeDamage(myStats.damage.GetValue());
+        if (opponentStats != null)
+        {
+            opponentStats.TakeDamage(myStats.damage.GetValue());
+            opponentStats = null;
+        }
     }
 }
