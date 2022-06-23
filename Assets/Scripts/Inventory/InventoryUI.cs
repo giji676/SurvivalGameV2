@@ -3,10 +3,12 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
     public Transform itemsParent;
+    public Transform armorParent;
     public GameObject inventoryUI;
 
     Inventory inventory;
     InventorySlot[] slots;
+    InventorySlot[] armorSlots;
 
     void Start()
     {
@@ -14,6 +16,7 @@ public class InventoryUI : MonoBehaviour
         inventory.onItemChangedCallback += UpdateUI;
 
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        armorSlots = armorParent.GetComponentsInChildren<InventorySlot>();
     }
 
     void UpdateUI()
