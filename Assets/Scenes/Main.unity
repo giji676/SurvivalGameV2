@@ -2212,7 +2212,7 @@ GameObject:
   - component: {fileID: 647337373}
   - component: {fileID: 647337372}
   m_Layer: 5
-  m_Name: InventoryHolder
+  m_Name: ItemsParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4432,8 +4432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6f7c5d7d8d2654bb511e1f2b771f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsParent: {fileID: 0}
-  inventoryUI: {fileID: 0}
+  itemsParent: {fileID: 647337371}
+  armorParent: {fileID: 0}
+  inventoryUI: {fileID: 1612342100}
 --- !u!114 &1311194344 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1563158847557610285, guid: 62b9d2b3a722048479e3dd0274639c57, type: 3}
