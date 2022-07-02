@@ -3,17 +3,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
 {
+    private Inventory inventory;
+
     new public string name = "New Item";
     public Sprite icon = null;
     public bool isDefaultItem = false;
 
-    public virtual void Use()
+    public virtual void Use(EquipmentManager equipmentManager)
     {
         //Debug.Log("Using " + name);
     }
 
     public void RemoveFromInventory()
     {
-        Inventory.instance.Remove(this);
+        //Inventory.instance.Remove(this);
     }
 }

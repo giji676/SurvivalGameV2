@@ -7,6 +7,9 @@ public class InventorySlot : MonoBehaviour
     public Button removeButton;
     Item item;
 
+    public Inventory inventory;
+    public EquipmentManager equipmentManager;
+
     public void AddItem(Item newItem)
     {
         item = newItem;
@@ -25,14 +28,14 @@ public class InventorySlot : MonoBehaviour
 
     public void OnRemoveButton()
     {
-        Inventory.instance.Remove(item);
+        inventory.Remove(item);
     }
 
     public void UseItem()
     {
         if (item != null)
         {
-            item.Use();
+            item.Use(equipmentManager);
         }
     }
 }

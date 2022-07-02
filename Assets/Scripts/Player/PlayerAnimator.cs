@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimator : CharacterAnimator
 {
     PlayerMotor playerMotor;
+    EquipmentManager equipmentManager;
 
     public WeaponAnimations[] weaponAnimations;
     Dictionary<Equipment, AnimationClip[]> weaponAnimationsDict;
@@ -17,7 +18,8 @@ public class PlayerAnimator : CharacterAnimator
     {
         base.Start();
         playerMotor = GetComponent<PlayerMotor>();
-        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
+        equipmentManager = GetComponent<EquipmentManager>();
+        equipmentManager.onEquipmentChanged += OnEquipmentChanged;
 
         weaponAnimationsDict = new Dictionary<Equipment, AnimationClip[]>();
         foreach (WeaponAnimations a in weaponAnimations)

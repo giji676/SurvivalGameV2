@@ -12,10 +12,10 @@ public class Equipment : Item
     public int armorModifier;
     public int damageModifier;
 
-    public override void Use()
+    public override void Use(EquipmentManager equipmentManager)
     {
-        base.Use();
-        EquipmentManager.instance.Equip(this);
+        base.Use(equipmentManager);
+        equipmentManager.Equip(this);
         RemoveFromInventory();
     }
 }

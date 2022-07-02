@@ -6,12 +6,14 @@ public class PlayerStats : CharacterStats
 {
     PlayerHealth playerHealth;
     InputManager inputManager;
+    EquipmentManager equipmentManager;
 
     void Start()
     {
         playerHealth = GetComponent<PlayerHealth>();
         inputManager = GetComponent<InputManager>();
-        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
+        equipmentManager = GetComponent<EquipmentManager>();
+        equipmentManager.onEquipmentChanged += OnEquipmentChanged;
     }
 
     void Update()
