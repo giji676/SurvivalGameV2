@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    /*
     #region Singleton
 
     public static EquipmentManager instance;
@@ -15,7 +14,6 @@ public class EquipmentManager : MonoBehaviour
     }
 
     #endregion
-    */
 
     public Equipment[] defaultItems;
     public SkinnedMeshRenderer targetMesh;
@@ -28,7 +26,7 @@ public class EquipmentManager : MonoBehaviour
 
     private void Start()
     {
-        inventory = gameObject.GetComponent<Inventory>();
+        inventory = Inventory.instance;
 
         int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[numSlots];

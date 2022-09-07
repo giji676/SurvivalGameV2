@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    /*
     #region Singleton
 
     public static Inventory instance;
@@ -19,7 +18,6 @@ public class Inventory : MonoBehaviour
     }
 
     #endregion
-    */
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;

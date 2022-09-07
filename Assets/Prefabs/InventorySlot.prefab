@@ -262,5 +262,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 4731528303887902388}
   removeButton: {fileID: 0}
-  inventory: {fileID: 0}
-  equipmentManager: {fileID: 0}

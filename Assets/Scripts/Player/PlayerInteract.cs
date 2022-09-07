@@ -11,7 +11,6 @@ public class PlayerInteract : MonoBehaviour
     private InputManager inputManager;
     private PlayerAnimator playerAnimator;
     private CharacterCombat characterCombat;
-    private Inventory inventory;
 
     private Interactable interactable;
 
@@ -21,7 +20,6 @@ public class PlayerInteract : MonoBehaviour
         playerUI = GetComponent<PlayerUI>();
         inputManager = GetComponent<InputManager>();
         playerAnimator = GetComponent<PlayerAnimator>();
-        inventory = gameObject.GetComponent<Inventory>();
         characterCombat = GetComponent<CharacterCombat>();
     }
 
@@ -62,9 +60,7 @@ public class PlayerInteract : MonoBehaviour
                     // If the object is an interactable, and E is pressed (interact)
                     if (interactable.gameObject.tag != "Enemy")
                     {
-                        bool wasPickedUp = inventory.Add(hitInfo.collider.gameObject.GetComponent<ItemPickup>().item);
-                        if (wasPickedUp)
-                            interactable.BaseInteract();
+                        interactable.BaseInteract();
                     }
                 }
             }
