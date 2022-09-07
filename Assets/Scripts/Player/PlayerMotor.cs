@@ -43,14 +43,17 @@ public class PlayerMotor : MonoBehaviour
     public void InventoryTrigger()
     {
         // Called from InputManager
-        inventoryUI.SetActive(!inventoryUI.activeSelf);
-
-        if (Cursor.lockState == CursorLockMode.Locked)
-            Cursor.lockState = CursorLockMode.None;
-        else if (Cursor.lockState == CursorLockMode.None)
+        if (inventoryUI.activeSelf) {
+            inventoryUI.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
-
-        Cursor.visible = !Cursor.visible;
+            Cursor.visible = false;
+        }
+        else
+        {
+            inventoryUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     public void ProcessMove(Vector2 input, float run)
