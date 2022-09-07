@@ -18,6 +18,13 @@ public class Equipment : Item
         equipmentManager.Equip(this);
         RemoveFromInventory();
     }
+
+    public override void EquipArmor(EquipmentManager equipmentManager)
+    {
+        base.EquipArmor(equipmentManager);
+        equipmentManager.Equip(this);
+        RemoveFromInventory();
+    }
 }
 
 

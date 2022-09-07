@@ -35,7 +35,14 @@ public class InventorySlot : MonoBehaviour
     {
         if (item != null)
         {
-            item.Use(equipmentManager);
+            if (item.armor)
+            {
+                item.EquipArmor(equipmentManager);
+            }
+            else
+            {
+                item.Use(equipmentManager);
+            }
         }
     }
 }

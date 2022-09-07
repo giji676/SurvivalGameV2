@@ -61,6 +61,11 @@ public class EquipmentManager : MonoBehaviour
         currentMeshes[slotIndex] = newMesh;
     }
 
+    public void EquipArmor(Equipment newItem)
+    {
+        int slotIndex = (int)newItem.equipSlot;
+    }
+
     public Equipment Unequip(int slotIndex)
     {
         // Unequip 1 item
