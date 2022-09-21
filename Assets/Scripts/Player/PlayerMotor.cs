@@ -17,7 +17,7 @@ public class PlayerMotor : MonoBehaviour
     private Vector2 smoothInputVelocity;
 
     public GameObject inventoryUI;
-    public EquipmentManager equipmentManager;
+    //public EquipmentManager equipmentManager;
 
     public Vector3 moveDirection;
 
@@ -37,7 +37,7 @@ public class PlayerMotor : MonoBehaviour
     public void UnequipAll()
     {
         // Called from InputManager
-        equipmentManager.UnequipAll();
+        //equipmentManager.UnequipAll();
     }
 
     public void InventoryTrigger()

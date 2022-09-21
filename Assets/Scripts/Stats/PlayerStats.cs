@@ -11,7 +11,7 @@ public class PlayerStats : CharacterStats
     {
         playerHealth = GetComponent<PlayerHealth>();
         inputManager = GetComponent<InputManager>();
-        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
+        //EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
     }
 
     void Update()

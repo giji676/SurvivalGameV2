@@ -2,34 +2,54 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Transform itemsParent;
-    public Transform armorParent;
+    public Transform inventoryParent;
+    public Transform hotbarParent;
     public GameObject inventoryUI;
 
     Inventory inventory;
-    InventorySlot[] slots;
-    InventorySlot[] armorSlots;
+    Hotbar hotbar;
+
+    InventorySlot[] inventorySlots;
+    InventorySlot[] hotbarSlots;
 
     void Start()
     {
         inventory = Inventory.instance;
-        inventory.onItemChangedCallback += UpdateUI;
+        inventory.onItemChangedCallback += UpdateInventoryUI;
 
-        slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-        armorSlots = armorParent.GetComponentsInChildren<InventorySlot>();
+        hotbar = Hotbar.instance;
+        hotbar.onItemChangedCallback += UpdateHotbarUI;
+
+        inventorySlots = inventoryParent.GetComponentsInChildren<InventorySlot>();
+        hotbarSlots = hotbarParent.GetComponentsInChildren<InventorySlot>();
     }
 
-    void UpdateUI()
+    void UpdateInventoryUI()
     {
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < inventorySlots.Length; i++)
         {
             if (i < inventory.items.Count)
             {
-                slots[i].AddItem(inventory.items[i]);
+                inventorySlots[i].AddItem(inventory.items[i]);
             }
             else
             {
-                slots[i].ClearSlot();
+                inventorySlots[i].ClearSlot();
+            }
+        }
+    }
+
+    void UpdateHotbarUI()
+    {
+        for (int i = 0; i < hotbarSlots.Length; i++)
+        {
+            if (i < hotbar.items.Count)
+            {
+                hotbarSlots[i].AddItem(hotbar.items[i]);
+            }
+            else
+            {
+                hotbarSlots[i].ClearSlot();
             }
         }
     }

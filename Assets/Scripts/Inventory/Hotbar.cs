@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Hotbar : MonoBehaviour
 {
     #region Singleton
 
-    public static Inventory instance;
+    public static Hotbar instance;
 
     private void Awake()
     {
         if (instance != null)
         {
-            Debug.LogWarning("More than one instance of inventory found!");
+            Debug.LogWarning("More than one instance of hotbar found!");
         }
         instance = this;
     }
@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-    public int inventorySpace = 24;
+    public int inventorySpace = 6;
     public List<Item> items = new List<Item>();
 
 

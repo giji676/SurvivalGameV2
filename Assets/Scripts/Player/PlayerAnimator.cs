@@ -17,7 +17,7 @@ public class PlayerAnimator : CharacterAnimator
     {
         base.Start();
         playerMotor = GetComponent<PlayerMotor>();
-        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
+        //EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
 
         weaponAnimationsDict = new Dictionary<Equipment, AnimationClip[]>();
         foreach (WeaponAnimations a in weaponAnimations)
