@@ -15,19 +15,26 @@ public class ItemPickup : Interactable
 
     void PickUp()
     {
-        bool wasPickedUp = Hotbar.instance.Add(item);
-        if (wasPickedUp)
+        if (TryHotbarPickUp())
         {
             Destroy(gameObject);
         }
         else
         {
-            wasPickedUp = Inventory.instance.Add(item);
-            if (wasPickedUp)
+            if (TryInventoryPickUp())
             {
                 Destroy(gameObject);
             }
         }
+    }
 
+    bool TryInventoryPickUp()
+    {
+        return Inventory.instance.Add(item);
+    }
+
+    bool TryHotbarPickUp()
+    {
+        return Hotbar.instance.Add(item);
     }
 }

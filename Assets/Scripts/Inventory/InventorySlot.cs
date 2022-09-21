@@ -33,4 +33,26 @@ public class InventorySlot : MonoBehaviour
             item.Use();
         }
     }
+
+    public void HotbarToInventory()
+    {
+        if (item != null)
+        {
+            if (Inventory.instance.Add(item))
+            {
+                Hotbar.instance.Remove(item);
+            }
+        }
+    }
+
+    public void InventoryToHotbar()
+    {
+        if (item != null)
+        {
+            if (Hotbar.instance.Add(item))
+            {
+                Inventory.instance.Remove(item);
+            }
+        }
+    }
 }

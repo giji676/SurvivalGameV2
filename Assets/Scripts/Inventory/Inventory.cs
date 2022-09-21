@@ -40,4 +40,12 @@ public class Inventory : MonoBehaviour
 
         return false;
     }
+
+    public void Remove(Item item)
+    {
+        items.Remove(item);
+
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
+    }
 }
