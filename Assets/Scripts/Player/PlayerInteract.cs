@@ -42,12 +42,17 @@ public class PlayerInteract : MonoBehaviour
                 playerUI.UpdateText(interactable.promptMessage);
 
                 // If Left Mouse Button is pressed (attack)
-                if (inputManager.onFoot.LMB.triggered)
+                if (inputManager.interaction.LMB.triggered)
                 {
                     // If the object hit is an enemy
                     if (interactable.gameObject.tag == "Enemy")
                     {
                         interactable.BaseInteract();
+                    }
+                    else if (interactable.gameObject.tag == "Node")
+                    {
+                        Node hitObject = hitInfo.collider.gameObject.GetComponent<Node>();
+                        Inventory.instance.Add(hitObject.Mine());
                     }
                     else
                     {
@@ -55,7 +60,7 @@ public class PlayerInteract : MonoBehaviour
                         characterCombat.Attack(null);
                     }
                 }
-                else if (inputManager.onFoot.Interact.triggered)
+                else if (inputManager.interaction.Interact.triggered)
                 {
                     // If the object is an interactable, and E is pressed (interact)
                     if (interactable.gameObject.tag != "Enemy")
@@ -65,7 +70,7 @@ public class PlayerInteract : MonoBehaviour
                 }
             }
         }
-        else if(inputManager.onFoot.LMB.triggered)
+        else if(inputManager.interaction.LMB.triggered)
         {
             // If the raycast didn't hit anything, still play the attack animation
             characterCombat.Attack(null);

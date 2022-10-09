@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc37a2280f41e84ea759ec2956afce5, type: 3}
-  m_Name: Chestplate
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  name: Chestplate
-  icon: {fileID: 21300000, guid: 5b1b7e1253d11d04696bb0aa31ffdab8, type: 3}
+  name: Shield
+  icon: {fileID: 21300000, guid: ed500720d26471d4b85c21c3726ba730, type: 3}
   isDefaultItem: 0
-  equipSlot: 1
-  mesh: {fileID: 927030785434997396, guid: f7cb4f47f67744c4cac31344cae0b40c, type: 3}
-  coveredMeshRegions: 0100000002000000
-  armorModifier: 5
+  itemType: 1
+  equipSlot: 4
+  mesh: {fileID: 4872841853790256672, guid: 53c91d133a7da284f9ee7a0863a1676b, type: 3}
+  coveredMeshRegions: 
+  armorModifier: 2
   damageModifier: 0

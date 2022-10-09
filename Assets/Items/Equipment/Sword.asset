@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc37a2280f41e84ea759ec2956afce5, type: 3}
-  m_Name: Helmet
+  m_Name: Sword
   m_EditorClassIdentifier: 
-  name: Helmet
-  icon: {fileID: 21300000, guid: b6ba095438aa217488040069d8679dba, type: 3}
+  name: Sword
+  icon: {fileID: 21300000, guid: 58684dbc53d989d4986e54faa7e8223f, type: 3}
   isDefaultItem: 0
-  equipSlot: 0
-  mesh: {fileID: 8304645034380360240, guid: a353f39dd4261834483f2378004cfa21, type: 3}
+  itemType: 1
+  equipSlot: 3
+  mesh: {fileID: 7600575627111078332, guid: 477c8417d15ad3248b2fd9be3a9ec3ac, type: 3}
   coveredMeshRegions: 
-  armorModifier: 3
-  damageModifier: 0
+  armorModifier: 0
+  damageModifier: 5

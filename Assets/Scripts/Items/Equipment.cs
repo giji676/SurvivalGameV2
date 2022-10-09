@@ -14,10 +14,14 @@ public class Equipment : Item
 
     public override void Use()
     {
-        Debug.Log("use");
         base.Use();
-        //EquipmentManager.instance.Equip(this);
-        RemoveFromInventory();
+        EquipmentManager.instance.Equip(this);
+    }
+
+    public override void StopUse()
+    {
+        base.StopUse();
+        EquipmentManager.instance.UnequipItem(this);
     }
 }
 

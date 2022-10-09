@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Leggings
   icon: {fileID: 21300000, guid: a03f14c18a9791743a9c8e5a60734b2a, type: 3}
   isDefaultItem: 0
+  itemType: 0
   equipSlot: 2
   mesh: {fileID: 8731429929118782670, guid: 1c7237f1016b17640951278e53e89262, type: 3}
   coveredMeshRegions: 00000000

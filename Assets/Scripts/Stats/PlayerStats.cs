@@ -16,10 +16,10 @@ public class PlayerStats : CharacterStats
 
     void Update()
     {
-        if (inputManager.onFoot.TakeDamage.triggered)
+        if (inputManager.interaction.TakeDamage.triggered)
             TakeDamage(10);
 
-        if (inputManager.onFoot.Heal.triggered)
+        if (inputManager.interaction.Heal.triggered)
             RestoreHealth(10);
 
         playerHealth.newHealth = currentHealth;
