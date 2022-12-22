@@ -25,7 +25,7 @@ public class Hotbar : MonoBehaviour
     public int inventorySpace = 6;
     public List<Item> items = new List<Item>();
 
-    private int activeSlot = -1;
+    public int activeSlot = -1;
 
     public bool Add(Item item)
     {

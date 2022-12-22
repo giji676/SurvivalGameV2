@@ -12,6 +12,8 @@ public class PlayerInteract : MonoBehaviour
     private PlayerAnimator playerAnimator;
     private CharacterCombat characterCombat;
 
+    Hotbar hotbar;
+
     private Interactable interactable;
 
     private void Start()
@@ -21,12 +23,26 @@ public class PlayerInteract : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerAnimator = GetComponent<PlayerAnimator>();
         characterCombat = GetComponent<CharacterCombat>();
+        hotbar = Hotbar.instance;
     }
 
     private void Update()
     {
         // Raycast each update
         playerUI.UpdateText(string.Empty);
+
+
+        // If Left Mouse Button is pressed (attack)
+        if (inputManager.interaction.LMB.triggered)
+        {
+            if (hotbar.activeSlot > -1)
+            {
+                if (hotbar.items[hotbar.activeSlot] is Stim stim)
+                {
+                    stim.Heal();
+                }
+            }
+        }
 
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * distance);

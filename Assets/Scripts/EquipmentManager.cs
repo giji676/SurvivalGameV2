@@ -26,10 +26,12 @@ public class EquipmentManager : MonoBehaviour
 
     private void Start()
     {
+        // Singleton instances of inventory, armor, and hotbar scripts
         inventory = Inventory.instance;
         armor = Armor.instance;
         hotbar = Hotbar.instance;
 
+        // Get the number of equipment slots
         int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[numSlots];
         currentMeshes = new SkinnedMeshRenderer[numSlots];
