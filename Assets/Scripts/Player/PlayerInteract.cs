@@ -39,7 +39,10 @@ public class PlayerInteract : MonoBehaviour
             {
                 if (hotbar.items[hotbar.activeSlot] is Stim stim)
                 {
-                    stim.Heal();
+                    if (!stim.inUse)
+                    {
+                        stim.Heal();
+                    }
                 }
             }
         }

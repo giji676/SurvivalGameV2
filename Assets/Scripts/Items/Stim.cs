@@ -9,9 +9,20 @@ public class Stim : Equipment
     public int heal;
     public float timeDelay;
 
+    public bool inUse;
+
     public void Heal()
     {
         mbStim = FindObjectOfType<MBStim>();
+        mbStim.stim = this;
         mbStim.Heal(heal, timeDelay);
+    }
+
+    public override void StopUse()
+    {
+        base.StopUse();
+        mbStim = FindObjectOfType<MBStim>();
+        mbStim.CancelHeal();
+        inUse = false;
     }
 }
