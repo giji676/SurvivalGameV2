@@ -31,7 +31,6 @@ public class PlayerInteract : MonoBehaviour
         // Raycast each update
         playerUI.UpdateText(string.Empty);
 
-
         // If Left Mouse Button is pressed (attack)
         if (inputManager.interaction.LMB.triggered)
         {

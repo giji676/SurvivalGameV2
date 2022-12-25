@@ -6,7 +6,7 @@ public class MBStim : MonoBehaviour
 {
     PlayerStats playerStats;
     IEnumerator healCoroutine;
-    public Stim stim;
+    public Stim stim; // Heal and CancelHeal called from this stim script
 
     private void Start()
     {
