@@ -15,7 +15,6 @@ public class PlayerMotor : MonoBehaviour
 
     private Vector2 currentInputVector;
     private Vector2 smoothInputVelocity;
-
     public GameObject inventoryUI;
     //public EquipmentManager equipmentManager;
 

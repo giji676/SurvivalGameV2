@@ -57,7 +57,7 @@ public class Hotbar : MonoBehaviour
             Item item = items[slot];
             if (slot == activeSlot)
             {
-                item.StopUse();
+                item.Unequip();
                 activeSlot = -1;
             }
 
@@ -65,11 +65,11 @@ public class Hotbar : MonoBehaviour
             {
                 if (activeSlot != -1)
                 {
-                    items[activeSlot].StopUse();
+                    items[activeSlot].Unequip();
                 }
 
                 activeSlot = slot;
-                item.Use();
+                item.Equip();
             }
 
             else if (item.itemType == ItemType.Armor)

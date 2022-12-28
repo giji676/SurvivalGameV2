@@ -34,7 +34,7 @@ public class Armor : MonoBehaviour
             if (item.itemType == ItemType.Armor)
             {
                 items.Add(item);
-                item.Use();
+                item.Equip();
 
                 if (onItemChangedCallback != null)
                     onItemChangedCallback.Invoke();

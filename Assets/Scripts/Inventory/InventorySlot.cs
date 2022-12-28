@@ -57,11 +57,11 @@ public class InventorySlot : MonoBehaviour
         //Inventory.instance.Remove(item);
     }
 
-    public void UseItem()
+    public void EquipItem()
     {
         if (item != null)
         {
-            item.Use();
+            item.Equip();
         }
     }
 

@@ -12,16 +12,20 @@ public class Equipment : Item
     public int armorModifier;
     public int damageModifier;
 
-    public override void Use()
+    public override void Equip()
     {
-        base.Use();
+        base.Equip();
         EquipmentManager.instance.Equip(this);
     }
 
-    public override void StopUse()
+    public override void Unequip()
     {
-        base.StopUse();
+        base.Unequip();
         EquipmentManager.instance.UnequipItem(this);
+    }
+
+    public void Use() {
+        Debug.Log("Using " + name);
     }
 }
 

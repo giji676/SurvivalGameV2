@@ -36,13 +36,18 @@ public class PlayerInteract : MonoBehaviour
         {
             if (hotbar.activeSlot > -1)
             {
+                Equipment equipment = (Equipment)hotbar.items[hotbar.activeSlot];
+                equipment.Use();
+
+                /*
                 if (hotbar.items[hotbar.activeSlot] is Stim stim)
                 {
                     if (!stim.inUse)
                     {
-                        stim.Heal();
+                        stim.Use();
                     }
                 }
+                */
             }
         }
 

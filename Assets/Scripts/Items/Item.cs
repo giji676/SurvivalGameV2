@@ -9,12 +9,12 @@ public class Item : ScriptableObject
     public ItemType itemType = ItemType.Item;
     public int maxStack = 1;
 
-    public virtual void Use()
+    public virtual void Equip()
     {
 
     }
 
-    public virtual void StopUse()
+    public virtual void Unequip()
     {
 
     }

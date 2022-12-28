@@ -11,16 +11,20 @@ public class Stim : Equipment
 
     public bool inUse;
 
-    public void Heal()
+    public void Use()
     {
         mbStim = FindObjectOfType<MBStim>();
         mbStim.stim = this;
         mbStim.Heal(heal, timeDelay);
     }
 
-    public override void StopUse()
+    public override void Unequip()
     {
-        base.StopUse();
+        base.Unequip();
+        StopUse();
+    }
+
+    private void StopUse() {
         mbStim = FindObjectOfType<MBStim>();
         mbStim.CancelHeal();
         inUse = false;
