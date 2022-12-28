@@ -5,17 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Stim")]
 public class Stim : Equipment
 {
-    MBStim mbStim;
+    MonoBehaviourHelper helper;
     public int heal;
-    public float timeDelay;
+    public float healTime;
 
-    public bool inUse;
-
-    public void Use()
+    public override void Use()
     {
-        mbStim = FindObjectOfType<MBStim>();
-        mbStim.stim = this;
-        mbStim.Heal(heal, timeDelay);
+        base.Use();
+        helper = FindObjectOfType<MonoBehaviourHelper>();
+        helper.equipmentScript = this;
+        helper.Heal(heal, healTime);
     }
 
     public override void Unequip()
@@ -24,9 +23,10 @@ public class Stim : Equipment
         StopUse();
     }
 
-    private void StopUse() {
-        mbStim = FindObjectOfType<MBStim>();
-        mbStim.CancelHeal();
+    private void StopUse() 
+    {
+        helper = FindObjectOfType<MonoBehaviourHelper>();
+        helper.CancelHeal();
         inUse = false;
     }
 }

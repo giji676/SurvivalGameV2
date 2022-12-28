@@ -30,6 +30,7 @@ public class PlayerInteract : MonoBehaviour
     {
         // Raycast each update
         playerUI.UpdateText(string.Empty);
+        PlayerInteractRay();
 
         // If Left Mouse Button is pressed (attack)
         if (inputManager.interaction.LMB.triggered)
@@ -37,25 +38,45 @@ public class PlayerInteract : MonoBehaviour
             if (hotbar.activeSlot > -1)
             {
                 Equipment equipment = (Equipment)hotbar.items[hotbar.activeSlot];
-                equipment.Use();
 
-                /*
-                if (hotbar.items[hotbar.activeSlot] is Stim stim)
+                if (!equipment.inUse) 
                 {
-                    if (!stim.inUse)
+                    equipment.Use();
+                    characterCombat.Attack(null);
+
+                    if (equipment.itemType == ItemType.Tool) 
                     {
-                        stim.Use();
+                        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+                        Debug.DrawRay(ray.origin, ray.direction * distance);
+                        RaycastHit hitInfo; 
+                        
+                        if (Physics.Raycast(ray, out hitInfo, distance, mask))
+                        {
+                            if (hitInfo.collider.GetComponent<Interactable>() != null)
+                            {
+                                interactable = hitInfo.collider.GetComponent<Interactable>();
+                                playerUI.UpdateText(interactable.promptMessage);
+                                {
+                                    if (interactable.gameObject.tag == "Node")
+                                    {
+                                        Node hitObject = hitInfo.collider.gameObject.GetComponent<Node>();
+                                        Inventory.instance.Add(hitObject.Mine());
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-                */
             }
         }
+    }
 
+    private void PlayerInteractRay() 
+    {
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * distance);
         RaycastHit hitInfo;
-
-        // If raycast hits anything
+        
         if (Physics.Raycast(ray, out hitInfo, distance, mask))
         {
             // If the object hit is an Interactable
@@ -64,26 +85,7 @@ public class PlayerInteract : MonoBehaviour
                 interactable = hitInfo.collider.GetComponent<Interactable>();
                 playerUI.UpdateText(interactable.promptMessage);
 
-                // If Left Mouse Button is pressed (attack)
-                if (inputManager.interaction.LMB.triggered)
-                {
-                    // If the object hit is an enemy
-                    if (interactable.gameObject.tag == "Enemy")
-                    {
-                        interactable.BaseInteract();
-                    }
-                    else if (interactable.gameObject.tag == "Node")
-                    {
-                        Node hitObject = hitInfo.collider.gameObject.GetComponent<Node>();
-                        Inventory.instance.Add(hitObject.Mine());
-                    }
-                    else
-                    {
-                        // If the object is not an enemy, still play the attack animation
-                        characterCombat.Attack(null);
-                    }
-                }
-                else if (inputManager.interaction.Interact.triggered)
+                if (inputManager.interaction.Interact.triggered)
                 {
                     // If the object is an interactable, and E is pressed (interact)
                     if (interactable.gameObject.tag != "Enemy")

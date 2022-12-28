@@ -8,6 +8,7 @@ public class Equipment : Item
     public EquipmentSlot equipSlot;
     public SkinnedMeshRenderer mesh;
     public EquipmentMeshRegion[] coveredMeshRegions;
+    public bool inUse;
 
     public int armorModifier;
     public int damageModifier;
@@ -24,7 +25,8 @@ public class Equipment : Item
         EquipmentManager.instance.UnequipItem(this);
     }
 
-    public void Use() {
+    public virtual void Use() 
+    {
         Debug.Log("Using " + name);
     }
 }

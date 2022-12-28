@@ -22,6 +22,7 @@ public class MBStim : MonoBehaviour
     public void CancelHeal()
     {
         StopCoroutine(healCoroutine);
+        stim.inUse = false;
     }
 
     private IEnumerator HealCoroutine(int point, float time)

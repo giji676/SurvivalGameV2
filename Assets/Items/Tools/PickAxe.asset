@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba5ab09cda12c04e80c7571453b4748, type: 3}
+  m_Name: PickAxe
+  m_EditorClassIdentifier: 
+  name: PickAxe
+  icon: {fileID: 21300000, guid: e8bbb6958fbdd3e4389b112a817c58dc, type: 3}
+  isDefaultItem: 0
+  itemType: 1
+  maxStack: 1
+  equipSlot: 3
+  mesh: {fileID: 7600575627111078332, guid: 477c8417d15ad3248b2fd9be3a9ec3ac, type: 3}
+  coveredMeshRegions: 
+  inUse: 0
+  armorModifier: 0
+  damageModifier: 0
+  damage: 30
+  attackSpeed: 1.8
+  range: 4
