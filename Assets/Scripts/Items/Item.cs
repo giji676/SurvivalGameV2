@@ -8,7 +8,7 @@ public class Item : ScriptableObject
     public bool isDefaultItem = false;
     public ItemType itemType = ItemType.Item;
     public int maxStack = 1;
-
+    public GameObject parent;
     public virtual void Equip()
     {
 

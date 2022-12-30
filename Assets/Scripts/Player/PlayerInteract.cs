@@ -44,31 +44,50 @@ public class PlayerInteract : MonoBehaviour
                     equipment.Use();
                     characterCombat.Attack(null);
 
-                    if (equipment.itemType == ItemType.Tool) 
+                    if (equipment is Tool tool) 
                     {
-                        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-                        Debug.DrawRay(ray.origin, ray.direction * distance);
-                        RaycastHit hitInfo; 
-                        
-                        if (Physics.Raycast(ray, out hitInfo, distance, mask))
-                        {
-                            if (hitInfo.collider.GetComponent<Interactable>() != null)
-                            {
-                                interactable = hitInfo.collider.GetComponent<Interactable>();
-                                playerUI.UpdateText(interactable.promptMessage);
-                                {
-                                    if (interactable.gameObject.tag == "Node")
-                                    {
-                                        Node hitObject = hitInfo.collider.gameObject.GetComponent<Node>();
-                                        Inventory.instance.Add(hitObject.Mine());
-                                    }
-                                }
-                            }
-                        }
+                        StartCoroutine(Cooldown(tool));
+                        StartCoroutine(ToolAttackCoroutine(tool));
                     }
                 }
             }
         }
+    }
+    
+    private IEnumerator ToolAttackCoroutine(Tool tool) 
+    {
+        Debug.Log("Started Hit");
+        yield return new WaitForSeconds(tool.hitTime);
+        
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        Debug.DrawRay(ray.origin, ray.direction * tool.range);
+        RaycastHit hitInfo; 
+        
+        if (Physics.Raycast(ray, out hitInfo, distance, mask))
+        {
+            if (hitInfo.collider.GetComponent<Interactable>() != null)
+            {
+                interactable = hitInfo.collider.GetComponent<Interactable>();
+                playerUI.UpdateText(interactable.promptMessage);
+                {
+                    if (interactable.gameObject.tag == "Node")
+                    {
+                        Node hitObject = hitInfo.collider.gameObject.GetComponent<Node>();
+                        Inventory.instance.Add(hitObject.Mine());
+                    }
+                }
+            }
+        }
+        Debug.Log("Finished Hit");
+    }
+
+    private IEnumerator Cooldown(Tool tool) 
+    {
+        Debug.Log("Started Cooldown");
+        tool.inUse = true;
+        yield return new WaitForSeconds(tool.attackSpeed);
+        tool.inUse = false;
+        Debug.Log("Finished Cooldown");
     }
 
     private void PlayerInteractRay() 

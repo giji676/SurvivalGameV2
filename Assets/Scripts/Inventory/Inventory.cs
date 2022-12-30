@@ -24,8 +24,7 @@ public class Inventory : MonoBehaviour
 
     public int inventorySpace = 24;
     public List<Item> items = new List<Item>();
-
-
+    
     public bool Add(Item item)
     {
         if (items.Count < inventorySpace)
