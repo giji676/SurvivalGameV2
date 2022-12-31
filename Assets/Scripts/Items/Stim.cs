@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Stim")]
 public class Stim : Equipment
 {
-    MonoBehaviourHelper helper;
     public int heal;
     public float healTime; // When the hp gets effected/healing happens (0sec to totalTime)
     public float totalTime; // How long the whole animation/heal takes // Time from start to finish untill another healing process can start

@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Tool")]
 public class Tool : Equipment
 {
-    MonoBehaviourHelper helper;
     public int damage;
     public float attackSpeed; // How long the whole attack takes // Time from start to finish untill another attack can start
     public float hitTime; // When the ray will be cast to register the hit (0sec to attackSpeed)
