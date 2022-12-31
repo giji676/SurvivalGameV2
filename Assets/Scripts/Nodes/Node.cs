@@ -15,13 +15,12 @@ public class Node : Interactable
     public Item Mine()
     {
         health -= 10f;
-        Debug.Log(health);
 
         if (health <= 0)
         {
             Destroy(gameObject);
         }
-        transform.localScale *= 0.95f;
+        transform.localScale *= 0.92f;
         return item;
     }
 }

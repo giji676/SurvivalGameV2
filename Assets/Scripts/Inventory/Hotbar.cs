@@ -21,6 +21,9 @@ public class Hotbar : MonoBehaviour
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
+    
+    public delegate void OnHotbarUse();
+    public OnHotbarUse onHotbarUseCallBack;
 
     public int inventorySpace = 6;
     public List<Item> items = new List<Item>();
@@ -54,10 +57,15 @@ public class Hotbar : MonoBehaviour
     {
         if (slot < items.Count)
         {
+                
             Item item = items[slot];
             if (slot == activeSlot)
             {
                 item.Unequip();
+                if (item is Equipment equipment) 
+                {
+                    equipment.inUse = false;
+                }
                 activeSlot = -1;
             }
 
@@ -70,6 +78,10 @@ public class Hotbar : MonoBehaviour
 
                 activeSlot = slot;
                 item.Equip();
+                if (item is Equipment equipment) 
+                {
+                    equipment.inUse = false;
+                }
             }
 
             else if (item.itemType == ItemType.Armor)
@@ -79,6 +91,8 @@ public class Hotbar : MonoBehaviour
                     Remove(item);
                 }
             }
+            if (onHotbarUseCallBack != null)
+                onHotbarUseCallBack.Invoke();
         }
     }
 }

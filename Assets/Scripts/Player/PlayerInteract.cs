@@ -11,10 +11,16 @@ public class PlayerInteract : MonoBehaviour
     private InputManager inputManager;
     private PlayerAnimator playerAnimator;
     private CharacterCombat characterCombat;
+    private PlayerStats playerStats;
 
     Hotbar hotbar;
 
     private Interactable interactable;
+    
+    private IEnumerator cooldownCoroutine;
+    private IEnumerator actionCoroutine;
+
+    Equipment equipment;
 
     private void Start()
     {
@@ -23,7 +29,9 @@ public class PlayerInteract : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerAnimator = GetComponent<PlayerAnimator>();
         characterCombat = GetComponent<CharacterCombat>();
+        playerStats = GetComponent<PlayerStats>();
         hotbar = Hotbar.instance;
+        hotbar.onHotbarUseCallBack += StopCoroutines;
     }
 
     private void Update()
@@ -37,7 +45,7 @@ public class PlayerInteract : MonoBehaviour
         {
             if (hotbar.activeSlot > -1)
             {
-                Equipment equipment = (Equipment)hotbar.items[hotbar.activeSlot];
+                equipment = (Equipment)hotbar.items[hotbar.activeSlot];
 
                 if (!equipment.inUse) 
                 {
@@ -46,8 +54,18 @@ public class PlayerInteract : MonoBehaviour
 
                     if (equipment is Tool tool) 
                     {
-                        StartCoroutine(Cooldown(tool));
-                        StartCoroutine(ToolAttackCoroutine(tool));
+                        cooldownCoroutine = Cooldown(equipment, tool.attackSpeed);
+                        actionCoroutine = ToolAttackCoroutine(tool);
+                        StartCoroutine(cooldownCoroutine);
+                        StartCoroutine(actionCoroutine);
+                    }
+
+                    if (equipment is Stim stim) 
+                    {
+                        cooldownCoroutine = Cooldown(equipment, stim.totalTime);
+                        actionCoroutine = StimCoroutine(stim);
+                        StartCoroutine(cooldownCoroutine);
+                        StartCoroutine(actionCoroutine);
                     }
                 }
             }
@@ -56,7 +74,6 @@ public class PlayerInteract : MonoBehaviour
     
     private IEnumerator ToolAttackCoroutine(Tool tool) 
     {
-        Debug.Log("Started Hit");
         yield return new WaitForSeconds(tool.hitTime);
         
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
@@ -78,18 +95,27 @@ public class PlayerInteract : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Finished Hit");
     }
 
-    private IEnumerator Cooldown(Tool tool) 
+    private IEnumerator StimCoroutine(Stim stim) 
     {
-        Debug.Log("Started Cooldown");
-        tool.inUse = true;
-        yield return new WaitForSeconds(tool.attackSpeed);
-        tool.inUse = false;
-        Debug.Log("Finished Cooldown");
+        yield return new WaitForSeconds(stim.healTime);
+        playerStats.RestoreHealth(stim.heal);
+    }
+    private IEnumerator Cooldown(Equipment equipment, float time) 
+    {
+        equipment.inUse = true;
+        yield return new WaitForSeconds(time);
+        equipment.inUse = false;
     }
 
+    private void StopCoroutines() 
+    {
+        if (cooldownCoroutine != null)
+            StopCoroutine(cooldownCoroutine);
+        if (actionCoroutine != null)
+            StopCoroutine(actionCoroutine);
+    }
     private void PlayerInteractRay() 
     {
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
