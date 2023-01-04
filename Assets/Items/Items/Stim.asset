@@ -17,10 +17,13 @@ MonoBehaviour:
   isDefaultItem: 0
   itemType: 1
   maxStack: 2
+  parent: {fileID: 0}
   equipSlot: 3
   mesh: {fileID: 7600575627111078332, guid: 477c8417d15ad3248b2fd9be3a9ec3ac, type: 3}
   coveredMeshRegions: 
+  inUse: 0
   armorModifier: 0
   damageModifier: 0
   heal: 20
-  timeDelay: 2.1
+  healTime: 0.6
+  totalTime: 1.2
