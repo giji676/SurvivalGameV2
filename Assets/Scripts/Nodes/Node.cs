@@ -12,15 +12,15 @@ public class Node : Interactable
         base.Interact();
     }
 
-    public Item Mine()
+    public InventoryItem Mine()
     {
-        health -= 10f;
+        health -= 1f;
 
         if (health <= 0)
         {
             Destroy(gameObject);
         }
         transform.localScale *= 0.92f;
-        return item;
+        return new InventoryItem(item);
     }
 }

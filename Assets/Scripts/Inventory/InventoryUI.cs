@@ -35,10 +35,10 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            if (i < inventory.items.Count)
+            if (i < inventory.inventoryItems.Count)
             {
                 inventorySlots[i].ClearSlot();
-                inventorySlots[i].AddItem(inventory.items[i]);
+                inventorySlots[i].AddItem(inventory.inventoryItems[i]);
             }
             else
             {
@@ -51,10 +51,10 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < armorSlots.Length; i++)
         {
-            if (i < armor.items.Count)
+            if (i < armor.inventoryItems.Count)
             {
                 armorSlots[i].ClearSlot();
-                armorSlots[i].AddItem(armor.items[i]);
+                armorSlots[i].AddItem(armor.inventoryItems[i]);
             }
             else
             {
@@ -67,10 +67,10 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < hotbarSlots.Length; i++)
         {
-            if (i < hotbar.items.Count)
+            if (i < hotbar.inventoryItems.Count)
             {
                 hotbarSlots[i].ClearSlot();
-                hotbarSlots[i].AddItem(hotbar.items[i]);
+                hotbarSlots[i].AddItem(hotbar.inventoryItems[i]);
             }
             else
             {

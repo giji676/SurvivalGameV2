@@ -23,6 +23,7 @@ public class EquipmentManager : MonoBehaviour
     public SkinnedMeshRenderer targetMesh;
     Equipment[] currentEquipment;
     SkinnedMeshRenderer[] currentMeshes;
+    private InventoryItem inventoryItem;
 
     private void Start()
     {
@@ -62,8 +63,11 @@ public class EquipmentManager : MonoBehaviour
         Equipment oldItem = currentEquipment[slotIndex];
         SetEquipmentBlendShapes(oldItem, 0);
         currentEquipment[slotIndex] = null;
-        if (!oldItem.isDefaultItem && oldItem.itemType != ItemType.Tool && oldItem.itemType != ItemType.Weapon)
-            inventory.Add(oldItem);
+        if (!oldItem.isDefaultItem && oldItem.itemType != ItemType.Tool && oldItem.itemType != ItemType.Weapon) 
+        {
+            inventoryItem = new InventoryItem(oldItem);
+            inventory.Add(inventoryItem);
+        }
     }
 
     void SetEquipmentBlendShapes(Equipment item, int weight)

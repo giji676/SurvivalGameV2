@@ -23,18 +23,17 @@ public class Armor : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
 
     public int inventorySpace = 5;
-    public List<Item> items = new List<Item>();
+    public List<InventoryItem> inventoryItems = new List<InventoryItem>();
 
 
-    public bool Add(Item item)
+    public bool Add(InventoryItem newItem)
     {
-        if (items.Count < inventorySpace)
+        if (inventoryItems.Count < inventorySpace)
         {
-
-            if (item.itemType == ItemType.Armor)
+            if (newItem.item.itemType == ItemType.Armor)
             {
-                items.Add(item);
-                item.Equip();
+                inventoryItems.Add(newItem);
+                newItem.item.Equip();
 
                 if (onItemChangedCallback != null)
                     onItemChangedCallback.Invoke();
@@ -46,9 +45,9 @@ public class Armor : MonoBehaviour
         return false;
     }
 
-    public void Remove(Item item)
+    public void Remove(InventoryItem newItem)
     {
-        items.Remove(item);
+        inventoryItems.Remove(newItem);
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();

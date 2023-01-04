@@ -19,7 +19,6 @@ public class PlayerInteract : MonoBehaviour
     
     private IEnumerator cooldownCoroutine;
     private IEnumerator actionCoroutine;
-
     Equipment equipment;
 
     private void Start()
@@ -45,7 +44,7 @@ public class PlayerInteract : MonoBehaviour
         {
             if (hotbar.activeSlot > -1)
             {
-                equipment = (Equipment)hotbar.items[hotbar.activeSlot];
+                equipment = (Equipment)hotbar.inventoryItems[hotbar.activeSlot].item;
 
                 if (!equipment.inUse) 
                 {

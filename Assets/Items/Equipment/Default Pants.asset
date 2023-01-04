@@ -15,8 +15,14 @@ MonoBehaviour:
   name: Pants
   icon: {fileID: 0}
   isDefaultItem: 1
+  itemType: 3
+  parent: {fileID: 0}
+  stackable: 0
+  maxStack: 1
+  currentStack: 1
   equipSlot: 2
   mesh: {fileID: 4724872977341513814, guid: be685b2fa5f79144487d48c8504bb226, type: 3}
   coveredMeshRegions: 00000000
+  inUse: 0
   armorModifier: 0
   damageModifier: 0

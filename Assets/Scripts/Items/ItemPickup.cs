@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemPickup : Interactable
 {
     public Item item;
+    private InventoryItem inventoryItem;
 
     protected override void Interact()
     {
@@ -30,11 +31,13 @@ public class ItemPickup : Interactable
 
     bool TryInventoryPickUp()
     {
-        return Inventory.instance.Add(item);
+        inventoryItem = new InventoryItem(item);
+        return Inventory.instance.Add(inventoryItem);
     }
 
     bool TryHotbarPickUp()
     {
-        return Hotbar.instance.Add(item);
+        inventoryItem = new InventoryItem(item);
+        return Hotbar.instance.Add(inventoryItem);
     }
 }

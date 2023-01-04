@@ -6,10 +6,7 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
     public Button removeButton;
-    public Item item;
-
-    int maxStack;
-    int currentStack = 0;
+    public InventoryItem inventoryItem;
 
     [SerializeField]
     private TextMeshProUGUI stackText;
@@ -24,32 +21,29 @@ public class InventorySlot : MonoBehaviour
         armor = Armor.instance;
         hotbar = Hotbar.instance;
 
-        if (currentStack >1)
-            stackText.text = currentStack.ToString();
-        else
-            stackText.text = "";
+        // if (item.currentStack > 1)
+        //     stackText.text = item.currentStack.ToString();
+        // else
+        //     stackText.text = "";
     }
 
-    public void AddItem(Item newItem)
+    public void AddItem(InventoryItem newInventoryItem)
     {
-        item = newItem;
-        icon.sprite = item.icon;
+        inventoryItem = newInventoryItem;
+        icon.sprite = inventoryItem.item.icon;
         icon.enabled = true;
-        maxStack = item.maxStack;
-        currentStack++;
 
-        if (currentStack > 1)
-            stackText.text = currentStack.ToString();
+        if (inventoryItem.currentStack > 1)
+            stackText.text = inventoryItem.currentStack.ToString();
         else
             stackText.text = "";
     }
 
     public void ClearSlot()
     {
-        item = null;
+        inventoryItem = null;
         icon.sprite = null;
         icon.enabled = false;
-        currentStack = 0;
     }
 
     public void OnRemoveButton()
@@ -57,6 +51,7 @@ public class InventorySlot : MonoBehaviour
         //Inventory.instance.Remove(item);
     }
 
+    /*
     public void EquipItem()
     {
         if (item != null)
@@ -64,6 +59,8 @@ public class InventorySlot : MonoBehaviour
             item.Equip();
         }
     }
+    */
+    /*
 
     public void HotbarTransfer()
     {
@@ -112,4 +109,5 @@ public class InventorySlot : MonoBehaviour
             }
         }
     }
+    */
 }

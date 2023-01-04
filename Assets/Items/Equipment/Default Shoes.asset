@@ -15,8 +15,14 @@ MonoBehaviour:
   name: Shoes
   icon: {fileID: 0}
   isDefaultItem: 1
+  itemType: 3
+  parent: {fileID: 0}
+  stackable: 0
+  maxStack: 1
+  currentStack: 1
   equipSlot: 5
   mesh: {fileID: 9099731907498800986, guid: fddeb1c329d183b4bb76e26c6a04aa7e, type: 3}
   coveredMeshRegions: 
+  inUse: 0
   armorModifier: 0
   damageModifier: 0

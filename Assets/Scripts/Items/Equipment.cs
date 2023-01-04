@@ -27,7 +27,7 @@ public class Equipment : Item
 
     public virtual void Use() 
     {
-        Debug.Log("Using " + name);
+        
     }
 }
 

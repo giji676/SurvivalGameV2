@@ -7,8 +7,11 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public bool isDefaultItem = false;
     public ItemType itemType = ItemType.Item;
-    public int maxStack = 1;
     public GameObject parent;
+    
+    public bool stackable = true;
+    public int maxStack = 32;
+    public int currentStack = 1;
     public virtual void Equip()
     {
 

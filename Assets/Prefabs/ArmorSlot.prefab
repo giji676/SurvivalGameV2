@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 5909296187278065504}
   removeButton: {fileID: 0}
+  item: {fileID: 0}
   stackText: {fileID: 1556629819113090372}
 --- !u!1 &9197825777031078273
 GameObject:

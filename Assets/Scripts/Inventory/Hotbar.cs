@@ -26,15 +26,15 @@ public class Hotbar : MonoBehaviour
     public OnHotbarUse onHotbarUseCallBack;
 
     public int inventorySpace = 6;
-    public List<Item> items = new List<Item>();
+    public List<InventoryItem> inventoryItems = new List<InventoryItem>();
 
     public int activeSlot = -1;
 
-    public bool Add(Item item)
+    public bool Add(InventoryItem newItem)
     {
-        if (items.Count < inventorySpace)
+        if (inventoryItems.Count < inventorySpace)
         {
-            items.Add(item);
+            inventoryItems.Add(newItem);
 
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
@@ -45,9 +45,9 @@ public class Hotbar : MonoBehaviour
         return false;
     }
 
-    public void Remove(Item item)
+    public void Remove(InventoryItem newItem)
     {
-        items.Remove(item);
+        inventoryItems.Remove(newItem);
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
@@ -55,10 +55,9 @@ public class Hotbar : MonoBehaviour
 
     public void UseSlot(int slot)
     {
-        if (slot < items.Count)
+        if (slot < inventoryItems.Count)
         {
-                
-            Item item = items[slot];
+            Item item = inventoryItems[slot].item;
             if (slot == activeSlot)
             {
                 item.Unequip();
@@ -73,7 +72,7 @@ public class Hotbar : MonoBehaviour
             {
                 if (activeSlot != -1)
                 {
-                    items[activeSlot].Unequip();
+                    inventoryItems[activeSlot].item.Unequip();
                 }
 
                 activeSlot = slot;
@@ -86,9 +85,9 @@ public class Hotbar : MonoBehaviour
 
             else if (item.itemType == ItemType.Armor)
             {
-                if (Armor.instance.Add(item))
+                if (Armor.instance.Add(inventoryItems[slot]))
                 {
-                    Remove(item);
+                    Remove(inventoryItems[slot]);
                 }
             }
             if (onHotbarUseCallBack != null)
